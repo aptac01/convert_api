@@ -1,0 +1,68 @@
+openapi: "3.0.0"
+info:
+  title: "Convert Api"
+  description: "Api that converts fixed number of currencies using current course from (probably) russian central bank"
+  version: "1.0"
+  contact:
+    name: "Alex Tamilin"
+    url: "https://t.me/aptac01"
+    email: "popovalex402@gmail.com"
+servers:
+  - url: "http://192.168.1.40:5000/"
+    description: "instance of the service in docker container"
+  - url: "http://192.168.1.40:1234/"
+    description: "instance running without docker"
+paths:
+  /convert_currency:
+    post:
+      summary: "converts currencies"
+      tags:
+      - main method
+      description: "convert ('RUB', 'USD', 'EUR', 'GBP', 'JPY', 'CNY', 'UAH') one into another"
+      requestBody:
+        description: "requestBody description <br/> Place your ad here"
+        content:
+          'application/json':
+            schema:
+              title: "List of parameters to use in request"
+              type: object
+              properties:
+                amount:
+                  type: integer
+                  description: "how much money do you have to convert"
+                from:
+                  type: string
+                  description: "name of the currency you want to convert from, must be ISO4217"
+                to:
+                  type: string
+                  description: "name of the currency you want to convert to"
+            examples:
+              example1:
+                summary: 1000 USD to RUB
+                description: "result should be somewhere around 65-75k"
+                value: '{"from": "USD","to": "RUB","amount": 1000}'
+                externalValue: "http://тут.может/быть-сцылка-на-файл-с-примером"
+              example2:
+                summary: 1000 RUB to USD
+                description: "result should be somewhere around 10-20"
+                value: '{"to": "USD","from": "RUB","amount": 1000}'
+                externalValue: "http://тут.может/быть-сцылка-на-файл-с-примером"
+      responses:
+        200:
+          description: "successfull response"
+          content:
+            application/json:
+              schema:
+                title: "object name"
+                type: object
+                anyOf:
+                  - type: object
+                    properties:
+                      result:
+                        type: integer
+                        description: "contains result of the conversion"
+                  - type: object
+                    properties:
+                      error:
+                        type: string
+                        description: "contains error text (if there was an error)"
