@@ -1,1 +1,1 @@
-docker run -d -it -p 5000:1234 --rm --name convert_api -v ${PWD}:/usr/src/convert_api convert_api python app2.py
+docker run -d -it -p 5000:1234 --rm --name convert_api -v ${PWD}:/usr/src/convert_api convert_api /bin/bash -c ". ./service_manager2.sh -a start_docker"
