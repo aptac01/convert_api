@@ -207,7 +207,7 @@ start_service_in_docker()
 	# формируем конфиг uwsgi
 	form_uwsgi_ini_string "${uwsgi_config_file}"
 	# запускаем сервис через uwsgi без nohup'ов и прочего
-	uwsgi --ini "${uwsgi_config_file}"
+	${uwsgi_exec} --ini "${uwsgi_config_file}"
 
 	log_msg "Service started succesfully on ${SERVER_ADDRESS}:${SERVER_PORT}"
 }

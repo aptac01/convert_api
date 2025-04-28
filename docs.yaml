@@ -8,9 +8,9 @@ info:
     url: "https://t.me/aptac01"
     email: "popovalex402@gmail.com"
 servers:
-  - url: "http://192.168.1.40:5000/"
+  - url: "http://192.168.56.104:5000/"
     description: "instance of the service in docker container"
-  - url: "http://192.168.1.40:1234/"
+  - url: "http://192.168.56.104:1234/"
     description: "instance running without docker"
 paths:
   /convert_currency:
